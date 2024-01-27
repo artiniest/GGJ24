@@ -28,19 +28,22 @@ public class PlayerController : MonoBehaviour
 
     // public KeyCode LActionKey = KeyCode.Space;
     // public KeyCode RActionKey = KeyCode.Space;
-    
+
     private void Update()
     {
-        // testKeysAndAxis();
+        testKeysAndAxis();
 
         // Get input for left hand
-        if (Input.GetAxis("LTrigger") > 0){
+        if (Input.GetAxis("LTrigger") > 0)
+        {
             lHorizontalInput = 0f;
             lVerticalInput = 0f;
 
             lUpdownInput = Input.GetAxis("LVertical");
             lRotationInput = Input.GetAxis("LHorizontal") * -1;
-        } else {
+        }
+        else
+        {
             lUpdownInput = 0f;
             lRotationInput = 0f;
 
@@ -48,13 +51,16 @@ public class PlayerController : MonoBehaviour
             lVerticalInput = Input.GetAxis("LVertical");
         }
 
-        if (Input.GetAxis("RTrigger") > 0){
+        if (Input.GetAxis("RTrigger") > 0)
+        {
             rHorizontalInput = 0f;
             rVerticalInput = 0f;
 
             rUpdownInput = Input.GetAxis("RVertical");
             rRotationInput = Input.GetAxis("RHorizontal") * -1;
-        } else {
+        }
+        else
+        {
             rUpdownInput = 0f;
             rRotationInput = 0f;
 
@@ -83,20 +89,15 @@ public class PlayerController : MonoBehaviour
             RHand.RotationObject.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
         }
 
-        // if (Input.GetAxis("LAction") > 0)
-        if (Input.GetButtonDown("LAction"))
+        if (Input.GetAxis("LAction") > 0 || !LHand.IsHolding)
         {
-            // Debug.Log("L grab");
-            if (!LHand.IsHolding)
-            {
-                // Try to pick up an object
-                LHand.TryPickUpObject();
-            }
-            else
-            {
-                // Release the held object
-                LHand.ReleaseHeldObject();
-            }
+            // Try to pick up an object
+            LHand.TryPickUpObject();
+        }
+        else
+        {
+            // Release the held object
+            LHand.ReleaseHeldObject();
         }
 
         if (Input.GetAxis("RAction") > 0)
