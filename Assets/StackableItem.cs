@@ -20,7 +20,7 @@ public class StackableItem : MonoBehaviour
 
             IsHandling = true;
 
-            Debug.Log(other.name);
+            //Debug.Log(other.name);
 
             other.transform.parent.SetParent(this.transform.parent);
             _other = other;

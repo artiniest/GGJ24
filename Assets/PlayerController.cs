@@ -30,16 +30,14 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        Debug.Log(Input.GetAxis("LVertical"));
         // Get input for left hand
         if (Input.GetAxis("LTrigger") > 0){
-            Debug.Log("LTrigger");
             lUpdownInput = Input.GetAxis("LVertical");
             lRotationInput = Input.GetAxis("LHorizontal");
             rUpdownInput = Input.GetAxis("RVertical");
             rRotationInput = Input.GetAxis("RHorizontal");
         } else {
-            Debug.Log(Input.GetAxis("LHorizontal"));
+            //Debug.Log(Input.GetAxis("LHorizontal"));
             lHorizontalInput = Input.GetAxis("LHorizontal");
             lVerticalInput = Input.GetAxis("LVertical");
             rHorizontalInput = Input.GetAxis("RHorizontal");
