@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        testKeysAndAxis();
+        // testKeysAndAxis();
+
         // Get input for left hand
         if (Input.GetAxis("LTrigger") > 0){
             lHorizontalInput = 0f;
@@ -82,10 +83,10 @@ public class PlayerController : MonoBehaviour
             RHand.RotationObject.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetAxis("LAction") > 0)
+        // if (Input.GetAxis("LAction") > 0)
         if (Input.GetButtonDown("LAction"))
         {
-            Debug.Log("L grab");
+            // Debug.Log("L grab");
             if (!LHand.IsHolding)
             {
                 // Try to pick up an object
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetAxis("RAction") > 0)
         {
-            Debug.Log("R grab");
+            // Debug.Log("R grab");
             if (!RHand.IsHolding)
             {
                 // Try to pick up an object
@@ -114,8 +115,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void testKeysAndAxis(){
-
+    void testKeysAndAxis()
+    {
         // for (int i = 3; i <= 20; i++)
         // {
         //     float axisValue = Input.GetAxisRaw("Axis " + i.ToString());
