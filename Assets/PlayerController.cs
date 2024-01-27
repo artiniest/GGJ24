@@ -2,13 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XInput;
 
 public class PlayerController : MonoBehaviour
 {
-
-    private XInputController _playeractions;
 
     [SerializeField]
     private Hand LHand;
