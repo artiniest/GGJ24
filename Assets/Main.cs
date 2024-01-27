@@ -9,6 +9,9 @@ public class Main
 
     public MouseInput MouseInput => _mouseInput;
     private MouseInput _mouseInput;
+
+    private int _score = 0;
+    public int Score => _score;
     
     private Main()
     {
@@ -27,6 +30,15 @@ public class Main
                 instance = new Main();
             }
             return instance;
+        }
+    }
+
+    public void AddToScore()
+    {
+        _score ++;
+        if (_score >= 2)
+        {
+            LoadScene.Instance.LoadSceneByName("Game");
         }
     }
 }
