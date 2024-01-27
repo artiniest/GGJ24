@@ -55,12 +55,13 @@ public class HandInput : MonoBehaviour
 
 
         // Move the GameObject in 3D space
-        transform.Translate(movement * Speed * Time.deltaTime);
+        transform.Translate(lMovement * Speed * Time.deltaTime);
+        transform.Translate(rMovement * Speed * Time.deltaTime);
 
         if (HandObject)
         {
             HandObject.transform.Rotate(Vector3.forward * lRotationInput * RotationSpeed * Time.deltaTime);
-            HandObject.transform.Rotate(Vector3.forward * lRotationInput * RotationSpeed * Time.deltaTime);
+            HandObject.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(actionKey))
