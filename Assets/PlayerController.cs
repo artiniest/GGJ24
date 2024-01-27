@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
+        Debug.Log(Input.GetAxis("LVertical"));
         // Get input for left hand
         if (Input.GetAxis("LTrigger") > 0){
             Debug.Log("LTrigger");
