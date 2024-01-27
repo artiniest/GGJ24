@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XInput;
 
 public class PlayerController : MonoBehaviour
 {
+
+    private XInputController _playeractions;
+
     [SerializeField]
     private Hand LHand;
 
@@ -25,21 +30,37 @@ public class PlayerController : MonoBehaviour
     private float rUpdownInput = 0f;
     private float rRotationInput = 0f;
 
-    public KeyCode LActionKey = KeyCode.Space;
-    public KeyCode RActionKey = KeyCode.Space;
+    // public KeyCode LActionKey = KeyCode.Space;
+    // public KeyCode RActionKey = KeyCode.Space;
     
     private void Update()
     {
+        testKeysAndAxis();
         // Get input for left hand
         if (Input.GetAxis("LTrigger") > 0){
+            lHorizontalInput = 0f;
+            lVerticalInput = 0f;
+
             lUpdownInput = Input.GetAxis("LVertical");
-            lRotationInput = Input.GetAxis("LHorizontal");
-            rUpdownInput = Input.GetAxis("RVertical");
-            rRotationInput = Input.GetAxis("RHorizontal");
+            lRotationInput = Input.GetAxis("LHorizontal") * -1;
         } else {
-            //Debug.Log(Input.GetAxis("LHorizontal"));
+            lUpdownInput = 0f;
+            lRotationInput = 0f;
+
             lHorizontalInput = Input.GetAxis("LHorizontal");
             lVerticalInput = Input.GetAxis("LVertical");
+        }
+
+        if (Input.GetAxis("RTrigger") > 0){
+            rHorizontalInput = 0f;
+            rVerticalInput = 0f;
+
+            rUpdownInput = Input.GetAxis("RVertical");
+            rRotationInput = Input.GetAxis("RHorizontal") * -1;
+        } else {
+            rUpdownInput = 0f;
+            rRotationInput = 0f;
+
             rHorizontalInput = Input.GetAxis("RHorizontal");
             rVerticalInput = Input.GetAxis("RVertical");
         }
@@ -65,8 +86,10 @@ public class PlayerController : MonoBehaviour
             RHand.RotationObject.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(LActionKey))
+        if (Input.GetAxis("LAction") > 0)
+        if (Input.GetButtonDown("LAction"))
         {
+            Debug.Log("L grab");
             if (!LHand.IsHolding)
             {
                 // Try to pick up an object
@@ -79,8 +102,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(RActionKey))
+        if (Input.GetAxis("RAction") > 0)
         {
+            Debug.Log("R grab");
             if (!RHand.IsHolding)
             {
                 // Try to pick up an object
@@ -90,6 +114,25 @@ public class PlayerController : MonoBehaviour
             {
                 // Release the held object
                 RHand.ReleaseHeldObject();
+            }
+        }
+    }
+
+    void testKeysAndAxis(){
+
+        // for (int i = 3; i <= 20; i++)
+        // {
+        //     float axisValue = Input.GetAxisRaw("Axis " + i.ToString());
+        //     if (Mathf.Abs(axisValue) > 0.2) // Use some threshold to filter out idle noise
+        //     {
+        //         Debug.Log("Axis " + i + " value: " + axisValue);
+        //     }
+        // }
+        for (int i = 0; i < 20; i++)
+        {
+            if (Input.GetKeyDown("joystick button " + i))
+            {
+                Debug.Log("Button pressed: " + i);
             }
         }
     }

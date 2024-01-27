@@ -5,12 +5,13 @@ public class AmbientSounds : MonoBehaviour
     public AudioClip heartBeat; // Assign this in the Inspector
     private AudioSource audioSource;
 
-    private float targetTime = 3f;
+    private float targetTime = 4f;
 
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = heartBeat;
     }
 
     private void Update(){
@@ -18,7 +19,7 @@ public class AmbientSounds : MonoBehaviour
 
         if (targetTime <= 0.0f)
         {
-            targetTime = 0f;
+            targetTime = 4f;
             heartBeatEvent();
         }
     }
