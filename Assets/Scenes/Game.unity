@@ -428,6 +428,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: voikansi
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 11f9d32c3e83d809db8d495a877c564a, type: 3}
+      propertyPath: m_TagString
+      value: Grabbable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -525,7 +529,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 0.1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1394,6 +1398,44 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1373469372 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4276836782421473496, guid: 3d6a4704c043e7bbfa42cccc9710c382, type: 3}
+  m_PrefabInstance: {fileID: 3135383200273067347}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1373469377
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373469372}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.23, y: 1.43, z: 0.5}
+  m_Center: {x: 0, y: -0.5, z: 0.74}
+--- !u!114 &1373469378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1373469372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23546c9fa6c0ff5feb16543d31369b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1549582162
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,6 +2252,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: tuoppi
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 67e337e08ed1d0a31965e97cc4b9a255, type: 3}
+      propertyPath: m_TagString
+      value: Grabbable
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3451118302482216456, guid: 67e337e08ed1d0a31965e97cc4b9a255, type: 3}
     m_RemovedGameObjects: []
@@ -2286,7 +2332,12 @@ PrefabInstance:
       propertyPath: collisionSound
       value: 
       objectReference: {fileID: 8300000, guid: cecbc085dcb3b70e69cd49b1d5a3c3a8, type: 3}
-    m_RemovedComponents: []
+    - target: {fileID: 7473188341248958863, guid: 3d6a4704c043e7bbfa42cccc9710c382, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5867334928628368125, guid: 3d6a4704c043e7bbfa42cccc9710c382, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -2296,6 +2347,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7303579248371490305, guid: 3d6a4704c043e7bbfa42cccc9710c382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2046278767}
+    - targetCorrespondingSourceObject: {fileID: 4276836782421473496, guid: 3d6a4704c043e7bbfa42cccc9710c382, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1373469378}
+    - targetCorrespondingSourceObject: {fileID: 4276836782421473496, guid: 3d6a4704c043e7bbfa42cccc9710c382, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1373469377}
     - targetCorrespondingSourceObject: {fileID: 7026014337227464457, guid: 3d6a4704c043e7bbfa42cccc9710c382, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1988777788}
