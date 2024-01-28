@@ -32,6 +32,7 @@ public class DrowsyEvent : ActionEvent
 
     private void Tween()
     {
+        Camera.main.GetComponent<AmbientSounds>().drowsyEvent();
         DrowsyImage.DOColor(_alphaColor, Random.Range(0.25f, 1.5f))
             .SetEase(Ease.InOutQuad)
             .OnComplete(() => TweenToClear()); // When complete, call the PingPongAlpha method to repeat;

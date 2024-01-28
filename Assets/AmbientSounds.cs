@@ -30,7 +30,7 @@ public class AmbientSounds : MonoBehaviour
         audioSource.PlayOneShot(heartBeat);
     }    
     
-    void drowsyEvent(){
+    public void drowsyEvent(){
         audioSource.PlayOneShot(drowsySound);
     }
 
