@@ -89,8 +89,9 @@ public class PlayerController : MonoBehaviour
             RHand.RotationObject.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetAxis("LAction") > 0 || !LHand.IsHolding)
+        if (Input.GetAxis("LAction") > 0)
         {
+            if (!LHand.IsHolding)
             // Try to pick up an object
             LHand.TryPickUpObject();
         }
@@ -100,19 +101,16 @@ public class PlayerController : MonoBehaviour
             LHand.ReleaseHeldObject();
         }
 
-        if (Input.GetAxis("RAction") > 0)
+        if (Input.GetAxis("RAction") > 0 && !RHand.IsHolding)
         {
-            // Debug.Log("R grab");
             if (!RHand.IsHolding)
-            {
-                // Try to pick up an object
-                RHand.TryPickUpObject();
-            }
-            else
-            {
-                // Release the held object
-                RHand.ReleaseHeldObject();
-            }
+            // Try to pick up an object
+            RHand.TryPickUpObject();    
+        }
+        else
+        {
+            // Release the held object
+            RHand.ReleaseHeldObject();
         }
     }
 
