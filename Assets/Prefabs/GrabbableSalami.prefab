@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4122814024655564812}
   m_Layer: 6
   m_Name: GrabbableSalami
-  m_TagString: Untagged
+  m_TagString: Grabbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsHandling: 0
+  IsHeld: 0
 --- !u!54 &5792376947330154038
 Rigidbody:
   m_ObjectHideFlags: 0

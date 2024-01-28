@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
             LHand.ReleaseHeldObject();
         }
 
-        if (Input.GetAxis("RAction") > 0 && !RHand.IsHolding)
+        if (Input.GetAxis("RAction") > 0)
         {
             if (!RHand.IsHolding)
             // Try to pick up an object

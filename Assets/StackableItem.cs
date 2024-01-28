@@ -14,23 +14,7 @@ public class StackableItem : MonoBehaviour
 
     public bool IsHandling = false;
 
-    public GrabbableObject GrabbableParent => _grabbableParent;
-    private GrabbableObject _grabbableParent;
-
-    // private void OnCollisionEnter(Collision other)
-    // {
-    //     // Debug.Log(other.gameObject.name);
-    //     // if (other.gameObject.layer == this.gameObject.layer)
-    //     // {
-    //     //     var otherRigidbody = other.gameObject.GetComponent<Rigidbody>();
-
-    //     //     if (otherRigidbody != null)
-    //     //     {
-    //     //         FixedJoint joint = gameObject.AddComponent<FixedJoint>();
-    //     //         joint.connectedBody = otherRigidbody;
-    //     //     }
-    //     // }
-    // }
+    public bool IsHeld = false;
 
     private void OnCollisionExit(Collision other)
     {
@@ -46,7 +30,7 @@ public class StackableItem : MonoBehaviour
     {
         if (other.gameObject.layer != this.gameObject.layer || other.gameObject.GetComponent<Joint>() != null) return;
         
-        if (!other.gameObject.GetComponent<StackableItem>().GrabbableParent.IsHeld && !_grabbableParent.IsHeld)
+        if (!other.gameObject.GetComponent<StackableItem>().IsHeld && !IsHeld) return;
 
         if (!collidingObjects.ContainsKey(other.collider))
         {
@@ -59,6 +43,9 @@ public class StackableItem : MonoBehaviour
 
     private void Update()
     {
+        // if (this.transform.position.y <= -2f)
+        //     transform.SetPositionAndRotation(new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
+        //     // transform.Translate(new Vector3(transform.position.x, 0, transform.position.z));
         foreach(var entry in collidingObjects.ToList())
         {
             collidingObjects[entry.Key] += Time.deltaTime;
