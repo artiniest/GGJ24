@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
     {
         testKeysAndAxis();
 
+        if (Input.GetButtonDown("Restart"))
+        {
+            LoadScene.Instance.LoadSceneByName("Game");
+        }
+        
         // Get input for left hand
         if (Input.GetAxis("LTrigger") > 0)
         {
@@ -82,15 +87,18 @@ public class PlayerController : MonoBehaviour
         if (LHand.RotationObject)
         {
             LHand.RotationObject.transform.Rotate(Vector3.forward * lRotationInput * RotationSpeed * Time.deltaTime);
+            LHand.HoldPivot.transform.Rotate(Vector3.forward * lRotationInput * RotationSpeed * Time.deltaTime);
         }
 
         if (RHand.RotationObject)
         {
             RHand.RotationObject.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
+            RHand.HoldPivot.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetAxis("LAction") > 0 || !LHand.IsHolding)
+        if (Input.GetAxis("LAction") > 0)
         {
+            if (!LHand.IsHolding)
             // Try to pick up an object
             LHand.TryPickUpObject();
         }
@@ -102,17 +110,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetAxis("RAction") > 0)
         {
-            // Debug.Log("R grab");
             if (!RHand.IsHolding)
-            {
-                // Try to pick up an object
-                RHand.TryPickUpObject();
-            }
-            else
-            {
-                // Release the held object
-                RHand.ReleaseHeldObject();
-            }
+            // Try to pick up an object
+            RHand.TryPickUpObject();    
+        }
+        else
+        {
+            // Release the held object
+            RHand.ReleaseHeldObject();
         }
     }
 

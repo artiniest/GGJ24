@@ -1,5 +1,7 @@
+// using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,29 +10,47 @@ public class DrowsyEvent : ActionEvent
     // [SerializeField]
     // private Camera MainCamera;
 
-    // [SerializeField]
-    // private Image DrowsyImage;
+    [SerializeField]
+    private Image DrowsyImage;
 
-    // private Color _startColor;
-    // private Color _targetColor;
+    private Color _alphaColor;
+    private Color _clearColor;
 
-    // private void Awake()
-    // {
-    //     MainCamera = Camera.main;
-    //     _startColor = DrowsyImage.color;
+    public float duration = 2f; // Duration of each alpha tween
+    public float startAlpha = 1f; // Starting alpha value
+    public float endAlpha = 0f; // Ending alpha value
 
-    //     _targetColor = DrowsyImage.color;
-    //     _targetColor.a = 1f;
-    // }
+    private void Awake()
+    {
+        _alphaColor = DrowsyImage.color;
+        _clearColor = DrowsyImage.color;
+        _alphaColor.a = 1f;
+        _clearColor.a = 0f;
+        TweenToClear();
+        
+    }
 
-    // private void Update()
-    // {
-    //     if (CountDown < TotalTime)
-    //     {
-    //         CountDown += Time.deltaTime;
-    //         // Debug.Log("Elapsed Time: " + CountDown.ToString("F2"));
+    private void Tween()
+    {
+        DrowsyImage.DOColor(_alphaColor, Random.Range(0.5f, 2f))
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() => TweenToClear()); // When complete, call the PingPongAlpha method to repeat;
+    }
 
-    //         DrowsyImage.color = Color.Lerp(_startColor, _targetColor, CountDown/TotalTime);
-    //     }
-    // }
+    private void TweenToClear()
+    {
+        DrowsyImage.DOColor(_clearColor, Random.Range(0.1f, 1.5f))
+            .SetEase(Ease.InOutQuad)
+            .OnComplete(() => 
+                {
+                    if (Random.Range(0,5) > 2) StartCoroutine(Wait());
+                    else Tween();
+                }); // When complete, call the PingPongAlpha method to repeat;
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(Random.Range(3,6));
+        Tween();
+    }
 }
