@@ -3,6 +3,7 @@ using UnityEngine;
 public class AmbientSounds : MonoBehaviour
 {
     public AudioClip heartBeat; // Assign this in the Inspector
+    public AudioClip drowsySound;
     private AudioSource audioSource;
 
     private float targetTime = 4f;
@@ -21,12 +22,19 @@ public class AmbientSounds : MonoBehaviour
         {
             targetTime = 4f;
             heartBeatEvent();
+            // drowsyEvent();
         }
     }
 
     void heartBeatEvent(){
         audioSource.PlayOneShot(heartBeat);
+    }    
+    
+    void drowsyEvent(){
+        audioSource.PlayOneShot(drowsySound);
     }
+
+
 
     // void OnCollisionEnter(Collision collision)
     // {
