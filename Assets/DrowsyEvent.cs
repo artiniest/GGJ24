@@ -32,25 +32,27 @@ public class DrowsyEvent : ActionEvent
 
     private void Tween()
     {
-        DrowsyImage.DOColor(_alphaColor, Random.Range(0.5f, 2f))
+        DrowsyImage.DOColor(_alphaColor, Random.Range(0.25f, 1.5f))
             .SetEase(Ease.InOutQuad)
             .OnComplete(() => TweenToClear()); // When complete, call the PingPongAlpha method to repeat;
     }
 
     private void TweenToClear()
     {
-        DrowsyImage.DOColor(_clearColor, Random.Range(0.1f, 1.5f))
+        DrowsyImage.DOColor(_clearColor, Random.Range(0.75f, 1f))
             .SetEase(Ease.InOutQuad)
             .OnComplete(() => 
                 {
-                    if (Random.Range(0,5) > 2) StartCoroutine(Wait());
+                    var random = Random.Range(0f,1f);
+                    Debug.Log(random);
+                    if (random > 0.6) StartCoroutine(Wait());
                     else Tween();
                 }); // When complete, call the PingPongAlpha method to repeat;
     }
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(Random.Range(3,6));
+        yield return new WaitForSeconds(Random.Range(2,5));
         Tween();
     }
 }
