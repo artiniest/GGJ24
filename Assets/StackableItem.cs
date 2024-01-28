@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StackableItem : MonoBehaviour
 {
     private bool _shouldDestroyNextFrame = false;
-    private StackableItem _other;
+    private StackableItem _otherStackable;
+    private Collider _other;
 
     private int _destroyCountdown = 10;
 
@@ -14,49 +17,64 @@ public class StackableItem : MonoBehaviour
     public GrabbableObject GrabbableParent => _grabbableParent;
     private GrabbableObject _grabbableParent;
 
-    private void Awake()
-    {
-        _grabbableParent = transform.parent.GetComponentInParent<GrabbableObject>();
-    }
+    // private void OnCollisionEnter(Collision other)
+    // {
+    //     // Debug.Log(other.gameObject.name);
+    //     // if (other.gameObject.layer == this.gameObject.layer)
+    //     // {
+    //     //     var otherRigidbody = other.gameObject.GetComponent<Rigidbody>();
 
-    private void OnTriggerEnter(Collider other)
+    //     //     if (otherRigidbody != null)
+    //     //     {
+    //     //         FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+    //     //         joint.connectedBody = otherRigidbody;
+    //     //     }
+    //     // }
+    // }
+
+    private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.layer == this. gameObject.layer)
+        if (other.gameObject.layer != this.gameObject.layer) return;
+
+        if (collidingObjects.ContainsKey(other.collider))
         {
-            _other = other.GetComponent<StackableItem>();
-            if (_grabbableParent == null && _other.GrabbableParent != null)
-                return;
-            
-            if (other.GetComponent<StackableItem>().IsHandling)
-                return;
-
-            IsHandling = true;
-
-            //Debug.Log(other.name);
-
-            other.transform.parent.SetParent(_grabbableParent.transform);
-            
-            _shouldDestroyNextFrame = true;
+            collidingObjects.Remove(other.collider);
         }
     }
 
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.layer != this.gameObject.layer || other.gameObject.GetComponent<Joint>() != null) return;
+        
+        if (!other.gameObject.GetComponent<StackableItem>().GrabbableParent.IsHeld && !_grabbableParent.IsHeld)
+
+        if (!collidingObjects.ContainsKey(other.collider))
+        {
+            collidingObjects.Add(other.collider, 0.0f);
+        }
+    }
+
+    private float collisionDuration = 1.0f;
+    public Dictionary<Collider, float> collidingObjects = new Dictionary<Collider, float>();
+
     private void Update()
     {
-        if (_shouldDestroyNextFrame && IsHandling)
+        foreach(var entry in collidingObjects.ToList())
         {
-            if (_destroyCountdown > 0)
+            collidingObjects[entry.Key] += Time.deltaTime;
+            
+            if(entry.Value >= collisionDuration)
             {
-                _destroyCountdown -= 1;
-                return;
+                var otherRigidbody = entry.Key.gameObject.GetComponent<Rigidbody>();
+
+                if (otherRigidbody)
+                {
+                    FixedJoint joint = gameObject.AddComponent<FixedJoint>();
+                    joint.connectedBody = otherRigidbody;
+
+                    collidingObjects.Remove(entry.Key);
+                }
             }
-
-            Destroy(this.gameObject);
-            Destroy(_other.gameObject);
-
-            Destroy(_other.transform.parent.GetComponent<Rigidbody>());
-            Destroy(_other.GrabbableParent.gameObject);
-
-            Main.Instance.AddToScore();
         }
     }
 }
