@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
     {
         testKeysAndAxis();
 
+        if (Input.GetButtonDown("Restart"))
+        {
+            LoadScene.Instance.LoadSceneByName("Game");
+        }
+        
         // Get input for left hand
         if (Input.GetAxis("LTrigger") > 0)
         {
