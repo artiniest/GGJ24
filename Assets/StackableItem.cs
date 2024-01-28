@@ -46,6 +46,8 @@ public class StackableItem : MonoBehaviour
     {
         if (other.gameObject.layer != this.gameObject.layer || other.gameObject.GetComponent<Joint>() != null) return;
         
+        if (!other.gameObject.GetComponent<StackableItem>().GrabbableParent.IsHeld && !_grabbableParent.IsHeld)
+
         if (!collidingObjects.ContainsKey(other.collider))
         {
             collidingObjects.Add(other.collider, 0.0f);

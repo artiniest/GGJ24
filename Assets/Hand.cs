@@ -12,15 +12,6 @@ public class Hand : MonoBehaviour
     private bool _isHolding;
     public bool IsHolding => _isHolding;
 
-    // Move to Hand.cs
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.CompareTag("Grabbable"))
-    //     {
-    //         _heldObject = other.gameObject;
-    //     }
-    // }
-
     public void NotifyOnTrigger(Collider other)
     {
         _heldObject = other.gameObject;
@@ -44,6 +35,8 @@ public class Hand : MonoBehaviour
         _isHolding = true;
         _heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics on the object
         _heldObject.transform.parent = RotationObject.transform; // Attach the object to the hand
+        var _heldComp = _heldObject.GetComponent<GrabbableObject>();
+        if (_heldComp != null) _heldComp.IsHeld = true;
     }
 
     public void ReleaseHeldObject()
