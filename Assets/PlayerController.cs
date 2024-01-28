@@ -87,11 +87,13 @@ public class PlayerController : MonoBehaviour
         if (LHand.RotationObject)
         {
             LHand.RotationObject.transform.Rotate(Vector3.forward * lRotationInput * RotationSpeed * Time.deltaTime);
+            LHand.HoldPivot.transform.Rotate(Vector3.forward * lRotationInput * RotationSpeed * Time.deltaTime);
         }
 
         if (RHand.RotationObject)
         {
             RHand.RotationObject.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
+            RHand.HoldPivot.transform.Rotate(Vector3.forward * rRotationInput * RotationSpeed * Time.deltaTime);
         }
 
         if (Input.GetAxis("LAction") > 0)
